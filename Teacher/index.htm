@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script src="./controllers/controller.js" type="module"></script>
+
+    <title>Test Engine</title>
+    <style>
+      datalist {
+        display: flex;
+        justify-content: space-between;
+        color: black;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-dark p-4">
+      <div class="container-fluid d-flex justify-content-evenly">
+        <span class="navbar-brand mb-0 fs-1 fw-bold">Questions CRUD</span>
+        <span>
+          <button type="button" class="btn btn-outline-light">
+            Load From Server
+          </button>
+          <button type="button" class="btn btn-outline-light">
+            Save to server
+          </button>
+        </span>
+      </div>
+    </nav>
+
+    <div class="container-fluid d-flex justify-content-center flex-column">
+      <div class="container my-4 shadow-sm p-3 mb-5 bg-body rounded">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="inputGroup-sizing-default"
+            >Question ID</span
+          >
+          <input
+            type="text"
+            class="form-control"
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-default"
+            id="questionID"
+          />
+        </div>
+        <div class="form-group">
+          <textarea
+            class="form-control"
+            placeholder="Enter Your Question Here"
+            id="question"
+            style="height: 100px"
+            maxlength="500"
+          ></textarea>
+          <span class="my-4">500 out of 500 characters remaining</span>
+        </div>
+        <div class="container mt-4">
+          <div class="container-fluid">
+            <div class="input-group flex-nowrap">
+              <span class="input-group-text" id="addon-wrapping">1</span>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Option 1"
+                aria-describedby="addon-wrapping"
+                id="option1"
+              />
+            </div>
+            <div class="input-group flex-nowrap">
+              <span class="input-group-text" id="addon-wrapping">2</span>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Option 2"
+                aria-describedby="addon-wrapping"
+                id="option2"
+              />
+            </div>
+            <div class="input-group flex-nowrap">
+              <span class="input-group-text" id="addon-wrapping">3</span>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Option 3"
+                aria-describedby="addon-wrapping"
+                id="option3"
+              />
+            </div>
+            <div class="input-group flex-nowrap">
+              <span class="input-group-text" id="addon-wrapping">4</span>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Option 4"
+                aria-describedby="addon-wrapping"
+                id="option4"
+              />
+            </div>
+            <label for="dropdown" class="fs-5 mt-2"
+              >Select Correct Option:
+            </label>
+            <select id="correctOption">
+              <option value="1">Option 1</option>
+              <option value="2">Option 2</option>
+              <option value="3">Option 3</option>
+              <option value="4">Option 4</option>
+            </select>
+            <div class="form-group mb-4">
+              <label>Score</label>
+              <input
+                min="1"
+                max="5"
+                class="form-range"
+                type="range"
+                value="0"
+                id="scoreSlider"
+                list="tickmarks"
+              />
+              <datalist id="tickmarks" class="form-range">
+                <option value="1" label="1"></option>
+                <option value="2" label="2"></option>
+                <option value="3" label="3"></option>
+                <option value="4" label="4"></option>
+                <option value="5" label="5"></option>
+              </datalist>
+            </div>
+            <div>
+              <button class="btn btn-outline-dark" id="add">Add</button>
+              <button class="btn btn-outline-dark" id="delete">Delete</button>
+              <button class="btn btn-outline-dark" id="search">Search</button>
+              <button class="btn btn-outline-dark" id="save">Save</button>
+              <button class="btn btn-outline-dark" id="load">Load</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h3>Total Records Mark Records UnMark Records</h3>
+      <table class="table table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>option1</td>
+            <td>option2</td>
+            <td>Option3</td>
+            <td>Option4</td>
+            <td>Correct Option</td>
+            <td>Score</td>
+            <td>Operations</td>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
