@@ -18,12 +18,13 @@ associative array in js:
         eg..
         ```
         var key = 1
-        var obj = {
-          1: 1,
-          2: 2,
-          ...
-        }
-        obj.key //will produce error because key does not exist in obj
+        <br>
+        var obj = {<br>
+          1: 1,<br>
+          2: 2,<br>
+          ...<br>
+        }<br>
+        obj.key //will produce error because key does not exist in obj<br>
         obj[key] //will return 1
         ```
 
