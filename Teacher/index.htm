@@ -12,6 +12,13 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <script src="./controllers/controller.js" type="module"></script>
 
     <title>Test Engine</title>
@@ -40,18 +47,44 @@
     </nav>
 
     <div class="container-fluid d-flex justify-content-center flex-column">
-      <div class="container my-4 shadow-sm p-3 mb-5 bg-body rounded">
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="inputGroup-sizing-default"
-            >Question ID</span
-          >
-          <input
-            type="text"
-            class="form-control"
-            aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-default"
-            id="questionID"
+      <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+        <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+          <path
+            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"
           />
+        </symbol>
+        <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+          <path
+            d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"
+          />
+        </symbol>
+        <symbol
+          id="exclamation-triangle-fill"
+          fill="currentColor"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+          />
+        </symbol>
+      </svg>
+      <input type="text" value="" class="d-none" id="questionID" />
+      <div class="container my-4 shadow-sm p-3 mb-5 bg-body rounded">
+        <div
+          class="alert alert-success d-flex align-items-center d-none"
+          id="alert"
+          role="alert"
+        >
+          <svg
+            class="bi flex-shrink-0 me-2"
+            width="24"
+            height="24"
+            role="img"
+            aria-label="Success:"
+          >
+            <use xlink:href="#check-circle-fill" />
+          </svg>
+          <div>Questions saved succesfully on disk</div>
         </div>
         <div class="form-group">
           <textarea
@@ -61,7 +94,9 @@
             style="height: 100px"
             maxlength="500"
           ></textarea>
-          <span class="my-4">500 out of 500 characters remaining</span>
+          <span class="my-4" id="text-area-remaining-chars"
+            >500 characters max</span
+          >
         </div>
         <div class="container mt-4">
           <div class="container-fluid">
@@ -133,12 +168,45 @@
                 <option value="5" label="5"></option>
               </datalist>
             </div>
-            <div>
-              <button class="btn btn-outline-dark" id="add">Add</button>
-              <button class="btn btn-outline-dark" id="delete">Delete</button>
-              <button class="btn btn-outline-dark" id="search">Search</button>
-              <button class="btn btn-outline-dark" id="save">Save</button>
-              <button class="btn btn-outline-dark" id="load">Load</button>
+            <div class="d-flex justify-content-between">
+              <div class="d-flex">
+                <button class="btn btn-outline-dark m-1" id="add">Add</button>
+                <button class="btn btn-outline-dark m-1" id="delete">
+                  Delete
+                </button>
+                <button class="btn btn-outline-dark m-1" id="save">Save</button>
+                <button class="btn btn-outline-dark m-1" id="load">Load</button>
+                <button class="btn btn-outline-dark m-1" id="update">
+                  Update
+                </button>
+                <button class="btn btn-outline-dark m-1" id="clear-form">
+                  Clear Form
+                </button>
+                <div class="dropdown m-1">
+                  <button
+                    class="btn btn-outline-dark dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Sort
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <span class="dropdown-item" id="sort-by-id">By ID</span>
+                    </li>
+                    <li>
+                      <span class="dropdown-item" id="sort-by-question"
+                        >By Question</span
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" id="searchInput" aria-label="Search">
+                <button class="btn btn-outline-dark" type="submit" id="search">Search</button>
+              </div>
             </div>
           </div>
         </div>
@@ -146,16 +214,22 @@
     </div>
 
     <div class="container">
-      <h3>Total Records Mark Records UnMark Records</h3>
+      <h3>
+        Total Records: <span id="totalRecord">0</span>
+        <br />
+        Marked Records: <span id="markedRecord">0</span>
+        <br />
+        Unmarked Records: <span id="unmarkedRecord">0</span>
+      </h3>
       <table class="table table-bordered">
         <thead class="table-dark">
           <tr>
             <td>Id</td>
             <td>Name</td>
-            <td>option1</td>
-            <td>option2</td>
-            <td>Option3</td>
-            <td>Option4</td>
+            <td>Option 1</td>
+            <td>Option 2</td>
+            <td>Option 3</td>
+            <td>Option 4</td>
             <td>Correct Option</td>
             <td>Score</td>
             <td>Operations</td>
